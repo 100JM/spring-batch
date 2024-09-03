@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hasudo.hasudobatch.mapper.tiberoegis.TiberoegisMapper">
+    <select id="selectOmms" resultType="com.hasudo.hasudobatch.model.Omms">
+        select
+            BSC_FCT_NM,
+            BSC_FCT_CD,
+            SIDO,
+            GUGUN,
+            FCT_CPC,
+            X,
+            Y,
+            dbms_lob.substr(st_astext("geom")) as geom,
+            "fid"  as FID
+        from
+            V_OM_MS_VW
+    </select>
+</mapper>

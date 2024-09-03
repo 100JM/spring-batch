@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hasudo.hasudobatch.mapper.postgresql.PostgresqlMapper">
+    <insert id="testInsert">
+        INSERT INTO test_batch_table
+            (id, message, record_time)
+        VALUES
+            (#{id}, #{message}, #{record_time})
+    </insert>
+</mapper>
