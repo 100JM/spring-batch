@@ -1,10 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hasudo.hasudobatch.mapper.postgresql.PostgresqlMapper">
-    <insert id="testInsert">
-        INSERT INTO test_batch_table
-            (id, message, record_time)
+    <insert id="insertOmmsList" parameterType="java.util.List">
+        INSERT INTO om_ms (
+            bsc_fct_nm,
+            bsc_fct_cd,
+            sido,
+            gugun,
+            fct_cpc,
+            x,
+            y,
+            geom,
+            fid,
+            create_at
+        )
         VALUES
-            (#{id}, #{message}, #{record_time})
+        <foreach collection="ommsList" item="item" separator=",">
+            (#{item.bscFctNm},
+            #{item.bscFctCd},
+            #{item.sido},
+            #{item.gugun},
+            #{item.fctCpc},
+            #{item.x},
+            #{item.y},
+            ST_GeomFromText(#{item.geom}, 3857),
+            #{item.fid},
+            localtimestamp
+            )
+        </foreach>
+        ON CONFLICT (fid)
+        DO UPDATE SET
+            bsc_fct_nm = EXCLUDED.bsc_fct_nm,
+            bsc_fct_cd = EXCLUDED.bsc_fct_cd,
+            sido = EXCLUDED.sido,
+            gugun = EXCLUDED.gugun,
+            fct_cpc = EXCLUDED.fct_cpc,
+            x = EXCLUDED.x,
+            y = EXCLUDED.y,
+            geom = EXCLUDED.geom,
+            create_at = EXCLUDED.create_at
+        WHERE
+            om_ms.bsc_fct_nm IS DISTINCT FROM EXCLUDED.bsc_fct_nm OR
+            om_ms.bsc_fct_cd IS DISTINCT FROM EXCLUDED.bsc_fct_cd OR
+            om_ms.sido IS DISTINCT FROM EXCLUDED.sido OR
+            om_ms.gugun IS DISTINCT FROM EXCLUDED.gugun OR
+            om_ms.fct_cpc IS DISTINCT FROM EXCLUDED.fct_cpc OR
+            om_ms.x IS DISTINCT FROM EXCLUDED.x OR
+            om_ms.y IS DISTINCT FROM EXCLUDED.y OR
+            om_ms.geom IS DISTINCT FROM EXCLUDED.geom
     </insert>
 </mapper>
+
+

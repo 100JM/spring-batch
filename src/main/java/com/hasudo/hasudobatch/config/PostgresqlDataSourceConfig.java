@@ -37,14 +37,6 @@ public class PostgresqlDataSourceConfig {
         return sessionFactory.getObject();
     }
 
-//    @Bean(name = "postgresqlTransactionManager")
-//    @Primary
-//    public DataSourceTransactionManager postgresqlTransactionManager(@Qualifier("postgresqlDataSource") DataSource dataSource) {
-//        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
-//        transactionManager.setGlobalRollbackOnParticipationFailure(false);
-//        return transactionManager;
-//    }
-
     @Bean(name = "postgresqlSqlSessionTemplate")
     @Primary
     public SqlSessionTemplate postgresqlSqlSessionTemplate(@Qualifier("postgresqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {

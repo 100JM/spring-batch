@@ -1,5 +1,7 @@
 package com.hasudo.hasudobatch.model;
 
+import java.time.LocalDateTime;
+
 public class Omms {
     private String bscFctNm;  // BSC_FCT_NM
     private String bscFctCd;  // BSC_FCT_CD
@@ -10,6 +12,8 @@ public class Omms {
     private double y;         // Y
     private String geom;      // GEOM
     private int fid;          // FID
+
+    private LocalDateTime createAt;
 
     public String getBscFctNm() {
         return bscFctNm;
@@ -83,9 +87,17 @@ public class Omms {
         this.fid = fid;
     }
 
+    public LocalDateTime getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
     @Override
     public String toString() {
-        return "YourModelClass{" +
+        return "Omms{" +
                 "bscFctNm='" + bscFctNm + '\'' +
                 ", bscFctCd='" + bscFctCd + '\'' +
                 ", sido='" + sido + '\'' +
@@ -95,6 +107,7 @@ public class Omms {
                 ", y=" + y +
                 ", geom='" + geom + '\'' +
                 ", fid=" + fid +
+                ", createAt='" + createAt + '\'' +
                 '}';
     }
 }

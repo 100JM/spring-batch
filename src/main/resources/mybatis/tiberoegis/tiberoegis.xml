@@ -3,11 +3,11 @@
 <mapper namespace="com.hasudo.hasudobatch.mapper.tiberoegis.TiberoegisMapper">
     <select id="selectOmms" resultType="com.hasudo.hasudobatch.model.Omms">
         select
-            BSC_FCT_NM,
-            BSC_FCT_CD,
+            BSC_FCT_NM AS bscFctNm,
+            BSC_FCT_CD AS bscFctCd,
             SIDO,
             GUGUN,
-            FCT_CPC,
+            FCT_CPC AS fctCpc,
             X,
             Y,
             dbms_lob.substr(st_astext("geom")) as geom,
